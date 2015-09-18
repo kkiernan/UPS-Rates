@@ -2,6 +2,15 @@
 
 A package for retrieving rates from the UPS Web Service API.
 
+- [Simple Example](#simple-example)
+- [Additional Options Example](#additional-options-example)
+- [UPS Codes](#ups-codes)
+    - [Services](#services)
+    - [Package Types](#package-types)
+    - [Package Weight Units](#package-weight-units)
+- [Requests](#requests)
+- [Responses](#responses)
+
 ## Simple Example
 
 ```
@@ -68,12 +77,11 @@ $options = [
 $ups = new \KKiernan\Ups('yourUsername', 'yourPassword', 'yourApiKey');
 
 $response = $ups->rates($options);
-
 ```
 
 ## UPS Codes
 
-### Service
+### Services
 
 The following are valid values for the `service` attribute.
 
@@ -127,3 +135,99 @@ Code | Value
 ---- | ---------
 LBS  | Pounds
 KGS  | Kilograms
+
+# Requests
+
+This package helps you build an XML request that gets sent to the UPS API. If you'd like to view the XML string generated, you can call the `Ups::getLastRequest` method after sending your request. For example:
+
+```
+...
+
+$ups = new \KKiernan\Ups('yourUsername', 'yourPassword', 'yourApiKey');
+
+$response = $ups->rates($options);
+
+echo $ups->getLastRequest();
+```
+
+# Responses
+
+The reponse is a SimpleXMLElement object. It includes a lot of useful data from the UPS API. You can access properties on the object pretty easily. For example, you can access the total charge via `$response->RatedShipment->TotalCharges->MonetaryValue`. This is pretty verbose, and I may add helpers in the future, but I like being able to access the full response for now.
+
+The following is an example response:
+
+```
+SimpleXMLElement Object
+(
+    [Response] => SimpleXMLElement Object
+    (
+        [TransactionReference] => SimpleXMLElement Object
+        (
+            [CustomerContext] => Rating and Service
+            [XpciVersion] => 1.0
+        )
+        [ResponseStatusCode] => 1
+        [ResponseStatusDescription] => Success
+    )
+    [RatedShipment] => SimpleXMLElement Object
+    (
+        [Service] => SimpleXMLElement Object
+        (
+            [Code] => 01
+        )
+        [RatedShipmentWarning] => Your invoice may vary from the displayed reference rates
+        [BillingWeight] => SimpleXMLElement Object
+        (
+            [UnitOfMeasurement] => SimpleXMLElement Object
+            (
+                [Code] => LBS
+            )
+            [Weight] => 1.0
+        )
+        [TransportationCharges] => SimpleXMLElement Object
+        (
+            [CurrencyCode] => USD
+            [MonetaryValue] => 26.09
+        )
+        [ServiceOptionsCharges] => SimpleXMLElement Object
+        (
+            [CurrencyCode] => USD
+            [MonetaryValue] => 0.00
+        )
+        [TotalCharges] => SimpleXMLElement Object
+        (
+            [CurrencyCode] => USD
+            [MonetaryValue] => 26.09
+        )
+        [GuaranteedDaysToDelivery] => 1
+        [ScheduledDeliveryTime] => 10:30 A.M.
+        [RatedPackage] => SimpleXMLElement Object
+        (
+            [TransportationCharges] => SimpleXMLElement Object
+            (
+                [CurrencyCode] => USD
+                [MonetaryValue] => 26.09
+            )
+            [ServiceOptionsCharges] => SimpleXMLElement Object
+            (
+                [CurrencyCode] => USD
+                [MonetaryValue] => 0.00
+            )
+            [TotalCharges] => SimpleXMLElement Object
+            (
+                [CurrencyCode] => USD
+                [MonetaryValue] => 26.09
+            )
+            [Weight] => 1.0
+            [BillingWeight] => SimpleXMLElement Object
+            (
+                [UnitOfMeasurement] => SimpleXMLElement Object
+                (
+                    [Code] => LBS
+                )
+                [Weight] => 1.0
+            )
+        )
+    )
+)
+```
