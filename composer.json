@@ -1,4 +1,7 @@
 {
+    "name": "kkiernan/ups-rates",
+    "license": "MIT",
+    "description": "A package for retrieving rates from the UPS Web Service API.",
 	"autoload": {
 		"psr-4": {
 			"KKiernan\\": "src/KKiernan"
