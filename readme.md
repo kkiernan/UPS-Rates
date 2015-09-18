@@ -2,6 +2,7 @@
 
 A package for retrieving rates from the UPS Web Service API.
 
+- [Installation](#composer)
 - [Simple Example](#simple-example)
 - [Additional Options Example](#additional-options-example)
 - [UPS Codes](#ups-codes)
@@ -10,6 +11,14 @@ A package for retrieving rates from the UPS Web Service API.
     - [Package Weight Units](#package-weight-units)
 - [Requests](#requests)
 - [Responses](#responses)
+
+## Installation
+
+Install using Composer. On the command line:
+
+```
+composer require kkiernan/ups-rates
+```
 
 ## Simple Example
 
