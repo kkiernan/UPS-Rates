@@ -11,7 +11,7 @@ $options = [
         'zip'           => '19153',
     ],
     'to'   => [
-        'name' => 'Jane Smith',
+        'name'  => 'Jane Smith',
         'city'  => 'Reading',
         'state' => 'PA',
         'zip'   => '19610',
@@ -19,13 +19,13 @@ $options = [
     'packages' => [
         [
             'weight' => 1,
-            'type' => '03',
-            'units' => 'KGS'
+            'units'  => 'KGS',
+            'type'   => '03',
         ],
         [
             'weight' => 2.5,
-            'type' => '02',
-            'units' => 'LBS'
+            'units'  => 'LBS',
+            'type'   => '02',
         ]
     ],
     'service'         => '02',
